@@ -1,8 +1,6 @@
 package com.asyncservice.service;
 
-import com.asyncservice.model.EmployeeAddresses;
-import com.asyncservice.model.EmployeeNames;
-import com.asyncservice.model.EmployeePhone;
+import com.asyncservice.model.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,6 +59,18 @@ public class AsyncService {
 		Thread.sleep(1000L);	//Intentional delay
 		log.info("employeePhoneData completed");
 		return CompletableFuture.completedFuture(employeePhoneData);
+	}
+
+	@Async("asyncExecutor")
+	public CompletableFuture<EmployeeProfiles> getEmployeeProfile() throws InterruptedException
+	{
+		log.info("getEmployeeProfile Starts");
+		EmployeeProfiles employeeProfilesData = restTemplate.getForObject("http://localhost:8082/profiles", EmployeeProfiles.class);
+
+		log.info("employeeNameData, {}", employeeProfilesData);
+		Thread.sleep(1000L);	//Intentional delay
+		log.info("employeeNameData completed");
+		return CompletableFuture.completedFuture(employeeProfilesData);
 	}
 
 }

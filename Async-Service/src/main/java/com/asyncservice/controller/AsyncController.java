@@ -1,8 +1,6 @@
 package com.asyncservice.controller;
 
-import com.asyncservice.model.EmployeeAddresses;
-import com.asyncservice.model.EmployeeNames;
-import com.asyncservice.model.EmployeePhone;
+import com.asyncservice.model.*;
 import com.asyncservice.service.AsyncService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,12 +28,14 @@ public class AsyncController {
 		CompletableFuture<EmployeeAddresses> employeeAddress = service.getEmployeeAddress();
 		CompletableFuture<EmployeeNames> employeeName = service.getEmployeeName();
 		CompletableFuture<EmployeePhone> employeePhone = service.getEmployeePhone();
+		CompletableFuture<EmployeeProfiles> employeeProfile = service.getEmployeeProfile();
 
 		// Wait until they are all done
-		CompletableFuture.allOf(employeeAddress, employeeName, employeePhone).join();
+		CompletableFuture.allOf(employeeAddress, employeeName, employeePhone, employeeProfile).join();
 		
 		log.info("EmployeeAddress--> " + employeeAddress.get());
 		log.info("EmployeeName--> " + employeeName.get());
 		log.info("EmployeePhone--> " + employeePhone.get());
+		log.info("EmployeeProfile--> " + employeeProfile.get());
 	}
 }

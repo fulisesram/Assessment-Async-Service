@@ -1,6 +1,7 @@
-package com.employeedataservice.model;
+package com.asyncservice.model;
 
 import lombok.Data;
+
 import java.io.Serializable;
 import java.util.List;
 

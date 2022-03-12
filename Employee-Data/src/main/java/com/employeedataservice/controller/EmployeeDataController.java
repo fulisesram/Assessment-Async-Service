@@ -3,6 +3,7 @@ package com.employeedataservice.controller;
 import com.employeedataservice.model.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -51,7 +52,7 @@ public class EmployeeDataController
 
 		EmployeePhone employeePhone = new EmployeePhone();
 		{
-			ArrayList<String> phoneNumberList = new ArrayList<String>();
+			ArrayList<String> phoneNumberList = new ArrayList<>();
 			
 			phoneNumberList.add("100000");
 			phoneNumberList.add("200000");
@@ -72,7 +73,7 @@ public class EmployeeDataController
 		EmployeeName employeeName1 = new EmployeeName();
 		EmployeeName employeeName2 = new EmployeeName();
 		
-		List<EmployeeName> employeeList = new ArrayList<EmployeeName>();
+		List<EmployeeName> employeeList = new ArrayList<>();
 		{
 			employeeName1.setFirstName("Santa");
 			employeeName1.setLastName("Singh");
@@ -89,4 +90,34 @@ public class EmployeeDataController
 
 		return employeeNamesList;
 	}
+
+	@RequestMapping(value = "/profiles", method = RequestMethod.GET)
+	public EmployeeProfiles getEmployeeProfiles()
+	{
+		log.info("get profiles Start");
+
+		EmployeeProfiles employeeProfilesList = new EmployeeProfiles();
+
+		EmployeeProfile employeeProfile1 = new EmployeeProfile();
+		EmployeeProfile employeeProfile2 = new EmployeeProfile();
+
+		List<EmployeeProfile> profileList = new ArrayList<>();
+		{
+			employeeProfile1.setProfile("Developer");
+			employeeProfile1.setSpecialization("Backeend");
+		}
+		{
+			employeeProfile2.setProfile("Developer");
+			employeeProfile2.setSpecialization("Frontend");
+		}
+
+		profileList.add(employeeProfile1);
+		profileList.add(employeeProfile2);
+
+		employeeProfilesList.setEmployeeProfileList(profileList);
+
+		return employeeProfilesList;
+	}
+
+
 }
